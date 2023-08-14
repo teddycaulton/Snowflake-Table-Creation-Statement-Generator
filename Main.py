@@ -35,9 +35,6 @@ def create_table_statement(database,schema,table, df):
     return create_tbl_statement
 
 
-df = pd.read_csv('/home/teddy/Documents/DATA_FOR_FRAN.csv', sep=",", nrows = 2000)
-parse_csv(df)
-
 
 st.set_page_config(page_title='Snowflake Table Creation Query Tool', page_icon="❄️")
 st.title('Snowflake Table Creation Query Tool')
