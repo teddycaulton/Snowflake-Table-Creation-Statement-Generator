@@ -25,12 +25,12 @@ def parse_csv(df):
 
 def create_table_statement(database,schema,table, df):
     ## Create the table if it doesn't exist:
-    create_tbl_statement = f"CREATE TABLE IF NOT EXISTS {database}.{schema}.{table} ("
+    create_tbl_statement = f'CREATE TABLE IF NOT EXISTS {database}.{schema}.{table} ('
 
     df = df.reset_index()
     for index, row in df.iterrows():
-        create_tbl_statement = create_tbl_statement + "'" + row['Column Name'] + "' " + row['Data Type'] + ", "
-    create_tbl_statement = create_tbl_statement[:-2] + ")"
+        create_tbl_statement = create_tbl_statement + '"' + row['Column Name'] + '" ' + row['Data Type'] + ', '
+    create_tbl_statement = create_tbl_statement[:-2] + ')'
         
     return create_tbl_statement
 
