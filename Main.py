@@ -54,5 +54,5 @@ if Input_Data:
 
     if st.button("Generate Query"):
         query = create_table_statement(database,schema,table, presented_outputs)
-        st.write(query)
+        st.code(query, language="sql")
 
