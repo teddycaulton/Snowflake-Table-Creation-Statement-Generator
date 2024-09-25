@@ -46,7 +46,7 @@ if Input_Data:
     df = pd.read_csv(Input_Data)
     csv_info = parse_csv(df)
     st.write('here is the columns and data types we see, feel free to edit the table below if something is off')
-    presented_outputs = st.experimental_data_editor(csv_info)
+    presented_outputs = st.data_editor(csv_info)
 
     database = st.text_input('Enter the database where this table will live')
     schema = st.text_input('Enter the schema where this table will live')
