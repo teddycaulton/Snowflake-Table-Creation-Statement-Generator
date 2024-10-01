@@ -51,6 +51,7 @@ if Input_Data:
     database = st.text_input('Enter the database where this table will live')
     schema = st.text_input('Enter the schema where this table will live')
     table = st.text_input('Enter the name of the table that will be created')
+    uppercase = st.checkbox("Uppercase all columns")
 
     if st.button("Generate Query"):
         query = create_table_statement(database,schema,table, presented_outputs)
