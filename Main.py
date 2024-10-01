@@ -23,13 +23,16 @@ def parse_csv(df):
     
     return table_info
 
-def create_table_statement(database,schema,table, df):
+def create_table_statement(database,schema,table, df, uppercase):
     ## Create the table if it doesn't exist:
     create_tbl_statement = f'CREATE TABLE IF NOT EXISTS {database}.{schema}.{table} ('
 
     df = df.reset_index()
     for index, row in df.iterrows():
-        create_tbl_statement = create_tbl_statement + '"' + row['Column Name'].upper() + '" ' + row['Data Type'] + ', '
+        if uppercase:
+            create_tbl_statement = create_tbl_statement + '"' + row['Column Name'].upper() + '" ' + row['Data Type'] + ', '
+        else:
+            create_tbl_statement = create_tbl_statement + '"' + row['Column Name'] + '" ' + row['Data Type'] + ', '
     create_tbl_statement = create_tbl_statement[:-2] + ')'
         
     return create_tbl_statement
@@ -54,6 +57,6 @@ if Input_Data:
     uppercase = st.checkbox("Uppercase all columns")
 
     if st.button("Generate Query"):
-        query = create_table_statement(database,schema,table, presented_outputs)
+        query = create_table_statement(database,schema,table, presented_outputs, uppercase)
         st.code(query, language="sql")
 
