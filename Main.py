@@ -29,7 +29,7 @@ def create_table_statement(database,schema,table, df):
 
     df = df.reset_index()
     for index, row in df.iterrows():
-        create_tbl_statement = create_tbl_statement + '"' + row['Column Name'] + '" ' + row['Data Type'] + ', '
+        create_tbl_statement = create_tbl_statement + '"' + row['Column Name'].upper() + '" ' + row['Data Type'] + ', '
     create_tbl_statement = create_tbl_statement[:-2] + ')'
         
     return create_tbl_statement
