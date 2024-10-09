@@ -3,12 +3,14 @@
 import pandas as pd
 import streamlit as st
 
-def parse_csv(df):
+def parse_csv(df, varchar):
 
     table_info = pd.DataFrame(columns = ['Column Name', 'Data Type'])
 
     for column in df.columns.values.tolist():
-        if (df[column].dtype.name == "int" or df[column].dtype.name == "int64"):
+        if varchar:
+            table_info.loc[len(table_info.index)] = [column, 'varchar(16777216)']
+        elif (df[column].dtype.name == "int" or df[column].dtype.name == "int64"):
             table_info.loc[len(table_info.index)] = [column, 'int']
         elif df[column].dtype.name == "object":
             table_info.loc[len(table_info.index)] = [column, 'varchar(16777216)']
@@ -44,10 +46,11 @@ st.title('Snowflake Table Creation Query Tool')
 st.subheader('Created by Teddy Caulton at teddycaulton.xyz')
 
 Input_Data = st.file_uploader("Upload your input data here, make sure it's a plain csv table with comma delimination", type = 'csv')
+varchar = st.checkbox("Make all data types VARCHAR")
 
 if Input_Data:
     df = pd.read_csv(Input_Data)
-    csv_info = parse_csv(df)
+    csv_info = parse_csv(df, varchar)
     st.write('here is the columns and data types we see, feel free to edit the table below if something is off')
     presented_outputs = st.data_editor(csv_info)
 
