@@ -45,8 +45,8 @@ st.set_page_config(page_title='Snowflake Table Creation Query Tool', page_icon="
 st.title('Snowflake Table Creation Query Tool')
 st.subheader('Created by Teddy Caulton at teddycaulton.xyz')
 
-Input_Data = st.file_uploader("Upload your input data here, make sure it's a plain csv table with comma delimination", type = 'csv')
 varchar = st.checkbox("Make all data types VARCHAR")
+Input_Data = st.file_uploader("Upload your input data here, make sure it's a plain csv table with comma delimination", type = 'csv')
 
 if Input_Data:
     df = pd.read_csv(Input_Data)
